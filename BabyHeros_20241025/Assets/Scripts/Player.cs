@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         m_camera = Camera.main;
-        InvokeRepeating("CreateBullet", 2f, 0.2f);
         m_bulletPool = new GameObjectPool<Bullet>(5, () =>
         {
             var obj = Instantiate(m_bulletPrefab);
@@ -47,6 +46,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            InvokeRepeating("CreateBullet", 1f, 0.2f);
+            //CreateBullet();
+        }
+
         m_dir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         if (m_dir != Vector3.zero)
         {

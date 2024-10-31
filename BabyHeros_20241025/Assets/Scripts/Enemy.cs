@@ -14,15 +14,15 @@ public class Enemy : MonoBehaviour
     }
 
     [SerializeField]
-    Player m_player;
-    [SerializeField]
     AiState m_curState;
     [SerializeField]
     float m_attackRange = 1.5f;
     [SerializeField]
     float m_sightRange = 5f;
 
+    Player m_player;
     NavMeshAgent m_navAgent;
+    int m_hp;
 
     public void AiBehaviorProcess()
     {
@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
                     }
                     SetState(AiState.Chase);
                     // Animation : Run/Walk
+                    m_navAgent.enabled = true;
                     m_navAgent.stoppingDistance = m_attackRange;
                     SetDestination();
                     return;
@@ -54,6 +55,26 @@ public class Enemy : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void SetDamage(int damage)
+    {
+        // hit animation
+        if (damage < 0) 
+            m_hp = 0;
+        else 
+            m_hp -= damage;
+        if (m_hp <= 0)
+        {
+            EnemyManager.Instance.RemoveEnemy(this);
+            m_navAgent.enabled = false;
+        }
+    }
+    public void InitEnemy(Player player)
+    {
+        // note : test hp
+        m_hp = 3;
+        m_player = player;
     }
     IEnumerator CoChaseToTarget(int frame)
     {
@@ -73,6 +94,7 @@ public class Enemy : MonoBehaviour
     }
     void SetDestination()
     {
+        m_navAgent.Warp(transform.position);
         StartCoroutine(CoChaseToTarget(20));
     }
     void SetState(AiState state)
@@ -88,6 +110,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AiBehaviorProcess();   
+        AiBehaviorProcess();
     }
 }
