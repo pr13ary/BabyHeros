@@ -25,6 +25,8 @@ public class EnemyManager : Singleton<EnemyManager>
     void CreateEnemy()
     {
         var enemy = m_enemyPool.Get();
+        var agent = enemy.GetComponent<NavMeshAgent>();
+        agent.enabled = true;
         enemy.transform.position = SpawnMonsters();
         enemy.gameObject.SetActive(true);
         

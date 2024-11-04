@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour
                     }
                     SetState(AiState.Chase);
                     // Animation : Run/Walk
-                    m_navAgent.enabled = true;
                     m_navAgent.stoppingDistance = m_attackRange;
                     SetDestination();
                     return;

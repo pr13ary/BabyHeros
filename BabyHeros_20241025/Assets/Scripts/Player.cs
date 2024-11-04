@@ -48,8 +48,8 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            InvokeRepeating("CreateBullet", 1f, 0.2f);
-            //CreateBullet();
+            //InvokeRepeating("CreateBullet", 1f, 0.2f);
+            CreateBullet();
         }
 
         m_dir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
