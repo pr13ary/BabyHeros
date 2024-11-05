@@ -69,11 +69,14 @@ public class Enemy : MonoBehaviour
             m_navAgent.enabled = false;
         }
     }
-    public void InitEnemy(Player player)
+    public void SetEnemy(Player player)
+    {
+        m_player = player;
+    }
+    public void InitEnemy()
     {
         // note : test hp
         m_hp = 3;
-        m_player = player;
     }
     IEnumerator CoChaseToTarget(int frame)
     {

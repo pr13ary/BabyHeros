@@ -28,6 +28,7 @@ public class EnemyManager : Singleton<EnemyManager>
         var agent = enemy.GetComponent<NavMeshAgent>();
         agent.enabled = true;
         enemy.transform.position = SpawnMonsters();
+        enemy.InitEnemy();
         enemy.gameObject.SetActive(true);
         
     }
@@ -54,7 +55,7 @@ public class EnemyManager : Singleton<EnemyManager>
             obj.SetActive(false);
             obj.transform.SetParent(transform);
             var enemy = obj.GetComponent<Enemy>();
-            enemy.InitEnemy(m_player);
+            enemy.SetEnemy(m_player);
             return enemy;
         });
         //Invoke("CreateEnemy", 1f);

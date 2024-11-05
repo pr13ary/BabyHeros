@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
+        print(collision.gameObject.name);
         if (collision.CompareTag("Wall"))
         {
             RemoveBullet();
