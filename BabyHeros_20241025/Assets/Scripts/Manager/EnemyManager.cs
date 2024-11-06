@@ -10,7 +10,7 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField]
     Transform m_plane;
     [SerializeField]
-    Player m_player;
+    public Player m_player;
 
     GameObjectPool<Enemy> m_enemyPool;
     int m_enemyCount;
@@ -25,8 +25,7 @@ public class EnemyManager : Singleton<EnemyManager>
     void CreateEnemy()
     {
         var enemy = m_enemyPool.Get();
-        var agent = enemy.GetComponent<NavMeshAgent>();
-        agent.enabled = true;
+        enemy.GetComponent<NavMeshAgent>().enabled = true;
         enemy.transform.position = SpawnMonsters();
         enemy.InitEnemy();
         enemy.gameObject.SetActive(true);
@@ -58,8 +57,8 @@ public class EnemyManager : Singleton<EnemyManager>
             enemy.SetEnemy(m_player);
             return enemy;
         });
-        //Invoke("CreateEnemy", 1f);
-        InvokeRepeating("CreateEnemy", 1f, 4f);
+        Invoke("CreateEnemy", 1f);
+        //InvokeRepeating("CreateEnemy", 1f, 4f);
     }
 
     // Update is called once per frame
