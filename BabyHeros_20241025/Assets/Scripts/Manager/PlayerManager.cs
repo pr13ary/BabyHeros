@@ -45,7 +45,7 @@ public class PlayerManager : SingletonDontDestroy<PlayerManager>
         SetActivePlayer(m_selectedPlayerIndex);
     }
     // Start is called before the first frame update
-    protected override void OnStart()
+    protected override void OnAwake()
     {
         SpawnAllPlayers();
     }
