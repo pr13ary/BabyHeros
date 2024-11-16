@@ -7,6 +7,7 @@ public enum SceneState
 {
     None = -1,
     Title,
+    Lobby,
     Game,
     Max
 }
@@ -26,7 +27,7 @@ public class LoadScene : SingletonDontDestroy<LoadScene>
     SceneState m_state = SceneState.Title;
     SceneState m_loadScene = SceneState.None;
 
-    //public SceneState GetScene { get { return m_state; } }
+    public SceneState GetScene { get { return m_state; } }
 
     public void LoadSceneAsync(SceneState scene)
     {
@@ -64,7 +65,7 @@ public class LoadScene : SingletonDontDestroy<LoadScene>
             }
             else
             {
-                print(m_loadState.progress * 100f);
+                //print(m_loadState.progress * 100f);
                 m_progressBar.value = m_loadState.progress;
                 m_progressLabel.text = ((int)(m_loadState.progress * 100f)).ToString() + '%';
             }

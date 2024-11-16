@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,10 +8,17 @@ public class PlayerManager : SingletonDontDestroy<PlayerManager>
 {
     [SerializeField]
     public GameObject[] m_playerPrefab;
+    [SerializeField]
+    CinemachineVirtualCamera m_virtualCamera;
 
     GameObject[] m_playerInstance;
     int m_selectedPlayerIndex = 0;
-    
+
+    #region UI test
+    [SerializeField]
+    Skill m_skillWindow;
+    #endregion
+
     public void SetActivePlayer(int index)
     {
         if (index < 0 || index >= m_playerInstance.Length) return;
@@ -28,6 +36,7 @@ public class PlayerManager : SingletonDontDestroy<PlayerManager>
         m_playerInstance[m_selectedPlayerIndex].transform.rotation = lastRotation;
 
         m_playerInstance[m_selectedPlayerIndex].SetActive(true);
+        m_virtualCamera.Follow = m_playerInstance[m_selectedPlayerIndex].transform;
         EnemyManager.Instance.m_player = m_playerInstance[m_selectedPlayerIndex].GetComponent<Player>();
 
     }
@@ -41,7 +50,6 @@ public class PlayerManager : SingletonDontDestroy<PlayerManager>
             m_playerInstance[i].transform.SetParent(transform);
             m_playerInstance[i].SetActive(false);
         }
-
         SetActivePlayer(m_selectedPlayerIndex);
     }
     // Start is called before the first frame update
@@ -53,6 +61,16 @@ public class PlayerManager : SingletonDontDestroy<PlayerManager>
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.I)) // note : skill window test
+        {
+            if (!m_skillWindow.IsOpened)
+            {
+                m_skillWindow.Open();
+            }
+            else
+            {
+                m_skillWindow.Close();
+            }
+        }
     }
 }
