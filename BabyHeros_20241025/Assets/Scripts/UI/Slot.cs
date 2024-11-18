@@ -5,23 +5,29 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
     [SerializeField]
-    Skill m_skillWindow;
+    SkillWindow m_skillWindow;
     [SerializeField]
     bool m_isSelected;
 
     public bool IsSelected { get { return m_isSelected; } set { m_isSelected = value; } }
-    public void InitSlot(Skill skillWindow)
+    public void InitSlot(SkillWindow skillWindow)
     {
         m_skillWindow = skillWindow;
     }
+    public void SelectSkill() // skill Àû¿ë
+    {
+        
+    }
     public void OnSelect()
     {
-        m_skillWindow.OnSelectSlot(this);
+        m_skillWindow.SelectSlot(this);
     }
     
-    public void SetSlot()
+    public void SetSlot(Skill skill)
     {
-
+        skill.transform.SetParent(transform);
+        skill.transform.localPosition = Vector3.zero;
+        skill.transform.localScale = Vector3.one;
     }
     // Start is called before the first frame update
     void Start()

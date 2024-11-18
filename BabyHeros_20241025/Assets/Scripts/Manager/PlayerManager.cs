@@ -16,7 +16,7 @@ public class PlayerManager : SingletonDontDestroy<PlayerManager>
 
     #region UI test
     [SerializeField]
-    Skill m_skillWindow;
+    SkillWindow m_skillWindow;
     #endregion
 
     public void SetActivePlayer(int index)

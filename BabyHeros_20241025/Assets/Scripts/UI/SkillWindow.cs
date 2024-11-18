@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill : MonoBehaviour
+public class SkillWindow : MonoBehaviour
 {
     [SerializeField]
     GameObject m_slotPrefab;
@@ -12,13 +12,24 @@ public class Skill : MonoBehaviour
     TweenScale m_tweenScale;
     [SerializeField]
     UISprite m_cursor;
+    [SerializeField]
+    GameObject m_skillPrefab;
 
     List<Slot> m_slotList = new List<Slot>();
     const int MAX_SLOT = 3;
 
     public bool IsOpened { get { return gameObject.activeSelf; } }
 
-    public void OnSelectSlot(Slot slot)
+    public void OnSelectSkill()
+    {
+        var curSlot = m_slotList.Find(slot => slot.IsSelected);
+        if (curSlot != null)
+        {
+            curSlot.SelectSkill();
+        }
+        
+    }
+    public void SelectSlot(Slot slot)
     {
         for(int i=0; i<m_slotList.Count; i++)
         {
@@ -35,6 +46,7 @@ public class Skill : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
+        FillSkill();
         m_tweenScale.PlayForward();
     }
     public void Close()
@@ -59,6 +71,22 @@ public class Skill : MonoBehaviour
             var slot = obj.GetComponent<Slot>();
             slot.InitSlot(this);
             m_slotList.Add(slot);
+        }
+    }
+    Skill CreateSkill()
+    {
+        SkillType type = (SkillType)Random.Range((int)SkillType.Blue, (int)SkillType.Max);
+        var obj = Instantiate(m_skillPrefab);
+        var skill = obj.GetComponent<Skill>();
+        skill.SetSkill(type);
+        return skill;
+    }
+    void FillSkill()
+    {
+        for(int i=0; i<m_slotList.Count; i++)
+        {
+            var skill = CreateSkill();
+            m_slotList[i].SetSlot(skill);
         }
     }
     // Start is called before the first frame update

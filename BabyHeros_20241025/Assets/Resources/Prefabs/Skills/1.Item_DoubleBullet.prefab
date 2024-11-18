@@ -104,6 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1226951808236086491}
+  - component: {fileID: 2833534524712899018}
   m_Layer: 5
   m_Name: 1.Item_DoubleBullet
   m_TagString: Untagged
@@ -119,7 +120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7481730355583577128}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 300, y: -20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -128,6 +129,21 @@ Transform:
   - {fileID: 3624777099696800061}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2833534524712899018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481730355583577128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f48130e0233e94a97f8990ac21cd94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_iconSprite: {fileID: 0}
+  m_funcLabel: {fileID: 0}
+  m_skillPrefabs: []
 --- !u!1 &8822452209985566531
 GameObject:
   m_ObjectHideFlags: 0
