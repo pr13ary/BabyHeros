@@ -27,7 +27,6 @@ public class SkillWindow : MonoBehaviour
         {
             curSlot.SelectSkill();
         }
-        
     }
     public void SelectSlot(Slot slot)
     {
@@ -45,6 +44,7 @@ public class SkillWindow : MonoBehaviour
     }
     public void Open()
     {
+        RemoveSkill();
         gameObject.SetActive(true);
         FillSkill();
         m_tweenScale.PlayForward();
@@ -58,6 +58,13 @@ public class SkillWindow : MonoBehaviour
         if(m_tweenScale.direction == AnimationOrTween.Direction.Reverse) 
         {
             gameObject.SetActive(false);
+        }
+    }
+    void RemoveSkill()
+    {
+        for(int i=0; i<m_slotList.Count; i++)
+        {
+            m_slotList[i].EmptySlot();
         }
     }
     void CreateSlot(int count)

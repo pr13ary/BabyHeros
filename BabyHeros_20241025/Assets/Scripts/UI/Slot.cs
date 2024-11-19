@@ -22,12 +22,18 @@ public class Slot : MonoBehaviour
     {
         m_skillWindow.SelectSlot(this);
     }
-    
     public void SetSlot(Skill skill)
     {
         skill.transform.SetParent(transform);
         skill.transform.localPosition = Vector3.zero;
         skill.transform.localScale = Vector3.one;
+    }
+    public void EmptySlot()
+    {
+        if (transform.childCount > 0)
+        {
+            Destroy(transform.GetChild(0).gameObject);
+        }
     }
     // Start is called before the first frame update
     void Start()
