@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     Player m_player;
     NavMeshAgent m_navAgent;
-    int m_hp;
+    float m_hp;
 
     public void AiBehaviorProcess()
     {
@@ -56,14 +56,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void SetDamage(int damage)
+    public void SetDamage(float damage)
     {
         // hit animation
-        if (damage < 0) 
-            m_hp = 0;
+        if (damage < 0f) 
+            m_hp = 0f;
         else 
             m_hp -= damage;
-        if (m_hp <= 0)
+        if (m_hp <= 0f)
         {
             EnemyManager.Instance.RemoveEnemy(this);
             m_navAgent.enabled = false;
@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
     public void InitEnemy()
     {
         // note : test hp
-        m_hp = 3;
+        m_hp = 3f;
     }
     IEnumerator CoChaseToTarget(int frame)
     {

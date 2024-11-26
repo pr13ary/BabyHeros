@@ -29,8 +29,10 @@ public class Player : MonoBehaviour
     GameObject m_bulletPrefab;
     [SerializeField]
     Transform m_bulletPos;
-
+    
     GameObjectPool<Bullet> m_bulletPool;
+    float m_bulletCount = 1f;
+    float m_damage = 1f;
     #endregion
 
     public void RemoveBullet(Bullet bullet)
@@ -43,10 +45,11 @@ public class Player : MonoBehaviour
         switch (type)
         {
             case SkillType.Blue: // Double Bullet
-                print("Double Bullet(Blue)");
+                m_bulletCount *= 2f;
                 break;
-            case SkillType.Green: // Change Weapon
-                print("Change Weapon(Green)");
+            case SkillType.Green: // Double Power
+                print("Double Power(Green)");
+                m_damage *= 2f;
                 break;
             case SkillType.Red: // Add Weapon
                 print("Add Weapon(Red)");
@@ -58,10 +61,22 @@ public class Player : MonoBehaviour
     }
     void CreateBullet()
     {
-        var bullet = m_bulletPool.Get();
-        bullet.transform.position = m_bulletPos.position;
-        bullet.transform.rotation = m_bulletPos.rotation;
-        bullet.gameObject.SetActive(true);
+        float totalAngle = Mathf.Lerp(10f, 30f, (float)(m_bulletCount - 1) / 10f);
+        totalAngle = Mathf.Clamp(totalAngle, 10f, 30f);
+        float angleStep = totalAngle / (m_bulletCount - 1);
+        float currentAngle = -totalAngle / 2f;
+
+        for (int i = 0; i < m_bulletCount; i++)
+        {
+            var bullet = m_bulletPool.Get();
+            bullet.transform.position = m_bulletPos.position;
+            Quaternion rotation = Quaternion.Euler(0, currentAngle, 0); // y축 기준 회전
+            Vector3 direction = rotation * m_bulletPos.forward;
+            bullet.transform.rotation = Quaternion.LookRotation(direction);
+            bullet.ChangeDamage(m_damage);
+            bullet.gameObject.SetActive(true);
+            currentAngle += angleStep;
+        }
     }
     
     // Start is called before the first frame update

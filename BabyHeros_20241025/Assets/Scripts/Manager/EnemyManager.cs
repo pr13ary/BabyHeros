@@ -16,7 +16,6 @@ public class EnemyManager : Singleton<EnemyManager>
     int m_enemyCount;
     Vector3 m_planeSize;
 
-
     public void RemoveEnemy(Enemy enemy)
     {
         enemy.gameObject.SetActive(false);
@@ -29,7 +28,7 @@ public class EnemyManager : Singleton<EnemyManager>
     }
     public void ResumeSpawning()
     {
-        InvokeRepeating("CreateEnemy", 1f, 4f);
+        InvokeRepeating("CreateEnemy", 1f, 2f);
     }
     void CreateEnemy()
     {
@@ -67,7 +66,7 @@ public class EnemyManager : Singleton<EnemyManager>
             return enemy;
         });
         //Invoke("CreateEnemy", 1f);
-        InvokeRepeating("CreateEnemy", 3f, 4f);
+        InvokeRepeating("CreateEnemy", 3f, 2f);
     }
 
     // Update is called once per frame

@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     float m_speed = 10f;
 
     Player m_player;
+    float m_damage = 1f;
 
     public void InitBullet(Player player)
     {
@@ -31,10 +32,13 @@ public class Bullet : MonoBehaviour
         {
             RemoveBullet();
             var enemy = collision.gameObject.GetComponent<Enemy>(); // note : getcomponent 수정 필요
-            enemy.SetDamage(1);
+            enemy.SetDamage(m_damage);
         }
     }
-
+    public void ChangeDamage(float damage)
+    {
+        m_damage = damage;
+    }
     // Start is called before the first frame update
     void Start()
     {
