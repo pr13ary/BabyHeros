@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     float m_speed = 3f;
 
-    Camera m_camera;
     Vector3 m_dir;
     Animator m_animator;
     float m_scale;
@@ -39,6 +38,24 @@ public class Player : MonoBehaviour
         bullet.gameObject.SetActive(false);
         m_bulletPool.Set(bullet);
     }
+    public void ApplySkill(SkillType type)
+    {
+        switch (type)
+        {
+            case SkillType.Blue: // Double Bullet
+                print("Double Bullet(Blue)");
+                break;
+            case SkillType.Green: // Change Weapon
+                print("Change Weapon(Green)");
+                break;
+            case SkillType.Red: // Add Weapon
+                print("Add Weapon(Red)");
+                break;
+            case SkillType.Magnet:
+                print("Magnet");
+                break;
+        }
+    }
     void CreateBullet()
     {
         var bullet = m_bulletPool.Get();
@@ -51,7 +68,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         m_animator = GetComponent<Animator>();
-        m_camera = Camera.main;
         m_bulletPool = new GameObjectPool<Bullet>(5, () =>
         {
             var obj = Instantiate(m_bulletPrefab);

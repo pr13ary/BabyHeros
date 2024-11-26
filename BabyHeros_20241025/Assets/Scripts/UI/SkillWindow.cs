@@ -26,6 +26,9 @@ public class SkillWindow : MonoBehaviour
         if (curSlot != null)
         {
             curSlot.SelectSkill();
+            Close();
+            EnemyManager.Instance.ResumeSpawning();
+            PlayerManager.Instance.SetLevelBar();
         }
     }
     public void SelectSlot(Slot slot)

@@ -21,17 +21,26 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         enemy.gameObject.SetActive(false);
         m_enemyPool.Set(enemy);
+        PlayerManager.Instance.AddXP(1f);
+    }
+    public void StopSpawning()
+    {
+        CancelInvoke("CreateEnemy");
+    }
+    public void ResumeSpawning()
+    {
+        InvokeRepeating("CreateEnemy", 1f, 4f);
     }
     void CreateEnemy()
     {
         var enemy = m_enemyPool.Get();
         enemy.GetComponent<NavMeshAgent>().enabled = true;
-        enemy.transform.position = SpawnMonsters();
+        enemy.transform.position = SpawnMonster();
         enemy.InitEnemy();
         enemy.gameObject.SetActive(true);
         
     }
-    Vector3 SpawnMonsters()
+    Vector3 SpawnMonster()
     {
         Vector3 planePosition = m_plane.position;
 
@@ -57,8 +66,8 @@ public class EnemyManager : Singleton<EnemyManager>
             enemy.SetEnemy(m_player);
             return enemy;
         });
-        Invoke("CreateEnemy", 1f);
-        //InvokeRepeating("CreateEnemy", 1f, 4f);
+        //Invoke("CreateEnemy", 1f);
+        InvokeRepeating("CreateEnemy", 3f, 4f);
     }
 
     // Update is called once per frame

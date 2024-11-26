@@ -5,6 +5,8 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
     [SerializeField]
+    Skill m_skill;
+    [SerializeField]
     SkillWindow m_skillWindow;
     [SerializeField]
     bool m_isSelected;
@@ -14,16 +16,18 @@ public class Slot : MonoBehaviour
     {
         m_skillWindow = skillWindow;
     }
-    public void SelectSkill() // skill Àû¿ë
-    {
-        
-    }
     public void OnSelect()
     {
         m_skillWindow.SelectSlot(this);
     }
+    public void SelectSkill()
+    {
+        if (m_skill == null) return;
+        m_skill.UseSkill();
+    }
     public void SetSlot(Skill skill)
     {
+        m_skill = skill;
         skill.transform.SetParent(transform);
         skill.transform.localPosition = Vector3.zero;
         skill.transform.localScale = Vector3.one;

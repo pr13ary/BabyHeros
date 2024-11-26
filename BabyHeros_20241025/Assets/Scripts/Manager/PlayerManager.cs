@@ -17,6 +17,52 @@ public class PlayerManager : SingletonDontDestroy<PlayerManager>
     #region UI test
     [SerializeField]
     SkillWindow m_skillWindow;
+    [SerializeField]
+    UIProgressBar m_levelBar;
+    [SerializeField]
+    UILabel m_levelLabel;
+
+    float m_currentXP = 0f;
+    float m_levelUpXP = 5f;
+
+    public void AddXP(float xp)
+    {
+        m_currentXP += xp;
+        UpdateLevelBar();
+        UpdateXPLabel();
+
+        if(m_currentXP >= m_levelUpXP)
+        {
+            LevelUP();
+        }
+    }
+    public void SetLevelBar()
+    {
+        m_levelBar.value = 0f;
+        UpdateXPLabel();
+    }
+    void UpdateLevelBar()
+    {
+        if(m_levelBar != null)
+        {
+            m_levelBar.value = m_currentXP / m_levelUpXP;
+        }
+    }
+    void UpdateXPLabel()
+    {
+        if(m_levelLabel != null)
+        {
+            m_levelLabel.text = $"{m_currentXP}/{m_levelUpXP}";
+        }
+    }
+    void LevelUP()
+    {
+        m_currentXP -= m_levelUpXP;
+        m_levelUpXP += 5f;
+        m_skillWindow.Open();
+        EnemyManager.Instance.StopSpawning();
+    }
+    
     #endregion
 
     public void SetActivePlayer(int index)
@@ -56,13 +102,16 @@ public class PlayerManager : SingletonDontDestroy<PlayerManager>
     protected override void OnAwake()
     {
         SpawnAllPlayers();
+        SetLevelBar();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I)) // note : skill window test
+        /*if (Input.GetKeyDown(KeyCode.I)) // note : skill window test
         {
+            Debug.Log(Input.inputString);
+
             if (!m_skillWindow.IsOpened)
             {
                 m_skillWindow.Open();
@@ -71,6 +120,6 @@ public class PlayerManager : SingletonDontDestroy<PlayerManager>
             {
                 m_skillWindow.Close();
             }
-        }
+        }*/
     }
 }

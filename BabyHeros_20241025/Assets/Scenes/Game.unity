@@ -1487,7 +1487,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 874248443}
+    mMethodName: OnSelectSkill
+    mParameters: []
+    oneShot: 0
 --- !u!65 &930884834
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2707,6 +2711,8 @@ MonoBehaviour:
   - {fileID: 1998019399887510125, guid: 3271109631e36fc4b874c8809e4d466c, type: 3}
   m_virtualCamera: {fileID: 1198482220}
   m_skillWindow: {fileID: 874248443}
+  m_levelBar: {fileID: 387782911}
+  m_levelLabel: {fileID: 42009857}
 --- !u!4 &2024578506
 Transform:
   m_ObjectHideFlags: 0
