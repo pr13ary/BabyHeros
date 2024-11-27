@@ -97,10 +97,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Firing State
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
-            // ÃÑ ½î±â animation
-            CreateBullet();
+            m_animator.SetBool("Shoot", true);
+            //CreateBullet();
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            m_animator.SetBool("Shoot", false);
         }
         
         // Move State
