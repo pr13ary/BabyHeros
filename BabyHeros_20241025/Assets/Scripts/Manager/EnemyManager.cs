@@ -10,17 +10,20 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField]
     Transform m_plane;
     [SerializeField]
+    GameObject m_XPBallPrefab;
+    [SerializeField]
     public Player m_player;
 
     GameObjectPool<Enemy> m_enemyPool;
+    GameObjectPool<XPBall> m_XPBallPool;
     int m_enemyCount;
     Vector3 m_planeSize;
 
     public void RemoveEnemy(Enemy enemy)
     {
+        CreateXPBall(enemy);
         enemy.gameObject.SetActive(false);
         m_enemyPool.Set(enemy);
-        PlayerManager.Instance.AddXP(1f);
     }
     public void StopSpawning()
     {
@@ -30,6 +33,17 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         InvokeRepeating("CreateEnemy", 1f, 2f);
     }
+    public void RemoveXPBall(XPBall XPBall)
+    {
+        XPBall.gameObject.SetActive(false);
+        m_XPBallPool.Set(XPBall);
+    }
+    void CreateXPBall(Enemy enemy)
+    {
+        var XPBall = m_XPBallPool.Get();
+        XPBall.transform.position = enemy.transform.position;
+        XPBall.gameObject.SetActive(true);
+    }
     void CreateEnemy()
     {
         var enemy = m_enemyPool.Get();
@@ -37,7 +51,6 @@ public class EnemyManager : Singleton<EnemyManager>
         enemy.transform.position = SpawnMonster();
         enemy.InitEnemy();
         enemy.gameObject.SetActive(true);
-        
     }
     Vector3 SpawnMonster()
     {
@@ -54,7 +67,16 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         m_planeSize = m_plane.GetComponent<MeshRenderer>().bounds.size;
 
-        // enemy object pool 持失
+        // XPBall object pool 持失
+        m_XPBallPool = new GameObjectPool<XPBall>(5, () =>
+        {
+            var obj = Instantiate(m_XPBallPrefab);
+            obj.SetActive(false);
+            var XPBall = obj.GetComponent<XPBall>();
+            return XPBall;
+        });
+
+        // Enemy object pool 持失
         m_enemyPool = new GameObjectPool<Enemy>(5, () =>
         {
             var obj = Instantiate(m_enemyPrefab);
