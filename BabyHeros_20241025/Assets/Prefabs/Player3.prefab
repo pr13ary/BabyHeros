@@ -437,9 +437,10 @@ GameObject:
   - component: {fileID: 4397868635979817363}
   - component: {fileID: 8122849427635398092}
   - component: {fileID: 8446249472021645353}
+  - component: {fileID: 4426126067158457566}
   m_Layer: 0
   m_Name: Player3
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -563,8 +564,32 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_speed: 3
+  m_fxMagnet: {fileID: 3828542091669611299}
   m_bulletPrefab: {fileID: 7251084614299321848, guid: 3de76a26530674f4e97ac44aac2cbb25, type: 3}
   m_bulletPos: {fileID: 8319975125367149792}
+--- !u!136 &4426126067158457566
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998019399887510125}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2463266835788788878
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,6 +2501,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 214962f542d66264c9308d01d4f561da, type: 3}
+--- !u!1 &3828542091669611299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5436383477448625161, guid: 214962f542d66264c9308d01d4f561da, type: 3}
+  m_PrefabInstance: {fileID: 9101879606565793578}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4934783250082279574 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4191585161836126140, guid: 214962f542d66264c9308d01d4f561da, type: 3}

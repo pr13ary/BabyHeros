@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    #region move
+    #region Basic
     [SerializeField]
     AnimationCurve m_moveStartCurve = AnimationCurve.Linear(0, 0, 1, 1);
     [SerializeField]
     AnimationCurve m_moveStopCurve = AnimationCurve.Linear(0, 0, 1, 1);
     [SerializeField]
     float m_speed = 3f;
+    [SerializeField]
+    GameObject m_fxMagnet;
 
     Vector3 m_dir;
     Animator m_animator;
@@ -35,6 +37,10 @@ public class Player : MonoBehaviour
     float m_damage = 1f;
     #endregion
 
+    public void SetFxMagnet(bool isOn)
+    {
+        m_fxMagnet.SetActive(isOn);
+    }
     public void RemoveBullet(Bullet bullet)
     {
         bullet.gameObject.SetActive(false);
@@ -55,7 +61,7 @@ public class Player : MonoBehaviour
                 print("Add Weapon(Red)");
                 break;
             case SkillType.Magnet:
-                print("Magnet");
+                SetFxMagnet(true);
                 break;
         }
     }
@@ -91,6 +97,7 @@ public class Player : MonoBehaviour
             bullet.InitBullet(this); // bullet과 player의 연결고리
             return bullet;
         });
+        SetFxMagnet(false);
     }
 
     // Update is called once per frame

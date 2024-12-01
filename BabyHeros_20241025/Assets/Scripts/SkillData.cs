@@ -22,7 +22,7 @@ public class SkillData : MonoBehaviour
 {
     [SerializeField]
     GameObject[] m_skillPrefabs;
-
+    
     static Dictionary<SkillType, SkillInfo> m_skillTable = new Dictionary<SkillType, SkillInfo>();
 
     public static SkillInfo GetSkillData(SkillType type)
